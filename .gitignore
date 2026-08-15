@@ -1,6 +1,15 @@
+# Build artifacts
 build/
-test-run/
 *.jar
-.DS_Store
+
+# Runtime data
+data/
+test-run/
+
+# IDE
 .idea/
 .vscode/
+
+# OS
+.DS_Store
+Thumbs.db
