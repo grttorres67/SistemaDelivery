@@ -1,0 +1,6 @@
+build/
+test-run/
+*.jar
+.DS_Store
+.idea/
+.vscode/
