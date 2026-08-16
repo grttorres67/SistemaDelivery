@@ -1,34 +1,85 @@
 # Sistema Delivery em Kotlin
 
-Este projeto implementa uma solução de delivery com interface de linha de comando (CLI) em Kotlin, composta por:
+Solução completa de delivery com interface de linha de comando (CLI), permitindo que restaurantes gerenciem cardápios e pedidos, enquanto clientes podem fazer e acompanhar pedidos.
 
-- Aplicativo de restaurante
-- Aplicativo de cliente
+## 📋 Requisitos
 
-Os dados são persistidos em arquivos locais em JSON e CSV na pasta `data`.
+- **Java 21+** (ou qualquer versão recente)
+- **Kotlin 2.3+** (compilador instalado)
 
-## Estrutura
+Verifique com:
+```bash
+java -version
+kotlinc -version
+```
 
-- `src/common/DeliveryCore.kt`: modelos, serialização JSON, manipulação de arquivos, utilitários gerais
-- `src/restaurante/RestauranteApp.kt`: fluxo do restaurante
-- `src/cliente/ClienteApp.kt`: fluxo do cliente
+## 🚀 Como usar
 
-## Compilar
+### 1. Compilar o projeto
 
 ```bash
 ./build.sh
 ```
 
-## Executar
+Isso gera dois arquivos JAR em `build/`:
+- `restaurante.jar`
+- `cliente.jar`
 
+### 2. Executar os aplicativos
+
+**Terminal 1 - App do Restaurante:**
 ```bash
 java -jar build/restaurante.jar
+```
+
+**Terminal 2 - App do Cliente:**
+```bash
 java -jar build/cliente.jar
 ```
 
-## Arquivos gerados
+## 📁 Estrutura do Projeto
 
-- `data/restaurante_1.json`
-- `data/restaurante_2.json`
-- `data/clientes.json`
-- `data/pedidos.csv`
+```
+src/
+├── common/
+│   └── DeliveryCore.kt        # Modelos, JSON parsing, persistência
+├── cliente/
+│   └── ClienteApp.kt          # Aplicativo do cliente
+└── restaurante/
+    └── RestauranteApp.kt      # Aplicativo do restaurante
+
+tests/
+└── cli_e2e.ps1                # Testes end-to-end automatizados
+
+build.sh                        # Script de compilação
+```
+
+## 💾 Dados Persistidos
+
+Os dados são armazenados localmente na pasta `data/`:
+
+- **restaurante_ID.json** — Cadastro, email único e cardápio de cada restaurante
+- **clientes.json** — Dados dos clientes e telefone único
+- **pedidos.csv** — Registro compartilhado de pedidos com filtros por email e telefone
+
+## 🎮 Funcionalidades
+
+### Restaurante
+- ✅ Cadastro e login com email
+- ✅ Gerenciar cardápio (ver, adicionar, remover itens)
+- ✅ Visualizar pedidos por status
+- ✅ Atualizar status do pedido (0 a 4)
+
+### Cliente
+- ✅ Cadastro e login com telefone
+- ✅ Realizar novos pedidos
+- ✅ Ver pedidos em andamento
+- ✅ Ver pedidos finalizados
+
+## 📊 Status dos Pedidos
+
+- `0` — SOLICITADO
+- `1` — EM PREPARAÇÃO
+- `2` — AGUARDANDO ENTREGADOR
+- `3` — EM TRÂNSITO
+- `4` — ENTREGUE
